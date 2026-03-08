@@ -1,0 +1,7 @@
+{
+  "name": "Zenith Task",
+  "description": "A futuristic, AI-powered task management system with real-time sync, smart suggestions, and a minimal high-performance UI.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

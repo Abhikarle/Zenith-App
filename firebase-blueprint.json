@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "A single task item in the system.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique task ID" },
+        "title": { "type": "string", "description": "Task title" },
+        "description": { "type": "string", "description": "Optional task description" },
+        "completed": { "type": "boolean", "description": "Completion status" },
+        "priority": { "type": "string", "enum": ["low", "medium", "high", "urgent"] },
+        "dueDate": { "type": "string", "format": "date-time" },
+        "categoryId": { "type": "string", "description": "ID of the category" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string", "description": "Owner's UID" },
+        "order": { "type": "number", "description": "Sort order" }
+      },
+      "required": ["id", "title", "completed", "priority", "userId", "order"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "A task category.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "color": { "type": "string" },
+        "icon": { "type": "string" }
+      },
+      "required": ["id", "name", "color"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and preferences.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "preferences": {
+          "type": "object",
+          "properties": {
+            "theme": { "type": "string", "enum": ["light", "dark", "system"] },
+            "compactMode": { "type": "boolean" }
+          }
+        }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Collection of user tasks"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Global or user-specific categories"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents"
+    }
+  }
+}
